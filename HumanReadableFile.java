@@ -9,9 +9,6 @@
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 
 /*
  * HumanReadableFile class represents a file in the file system that can be read.
