@@ -1,26 +1,44 @@
-// DON'T FORGET TO ADHERE TO CSE11 STYLE GUIDELINES!
+///////////////////////////////////////////////////////////////////////////////
+//                   ALL STUDENTS COMPLETE THESE SECTIONS
+// Main Class File:    Assignment7.java
+// File:               FSFile.java
+// Quarter:            Spring 2024
+//
+// Author`s Name:      Sia Khorsand 
+// Professor:          Dr. Ochoa
 
 import java.util.ArrayList;
+
+/*
+ * FSFile class represents a file in the file system.
+ * 
+ * Bugs: none 
+ * 
+ * @author Sia Khorsand
+ */
 
 public abstract class FSFile extends FSComponent  {
 
     private FSDirectory parentDir;
 
-    /**
-     * No-arg constructor.
-     * DO NOT CHANGE!
-     */
+    // Constructors 
     protected FSFile() {
         super("FSFile");
     }
 
     protected FSFile(String name) {
+        super(name);
     }
 
+    // Methods
+    
+    @Override
     public boolean isFile() {
+        return true;
     }
-
+    @Override
     public boolean isDirectory() {
+        return false;
     }
 
     /**
@@ -45,6 +63,15 @@ public abstract class FSFile extends FSComponent  {
 
     @Override
     public boolean equals(Object obj) {
+        if(obj instanceof FSFile){
+            FSFile other = (FSFile) obj;
+            return super.equals(other) && ((this.parentDir.equals(other.parentDir) || (this.parentDir != null) && this.parentDir.equals(other.parentDir)));
+        } else {
+            return false;
+        }
     }
+
+    public abstract void outputFileContents(String outputFileName) throws Exception;
+
 
 }

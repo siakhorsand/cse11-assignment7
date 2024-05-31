@@ -1,4 +1,11 @@
-// DON'T FORGET TO ADHERE TO CSE11 STYLE GUIDELINES!
+///////////////////////////////////////////////////////////////////////////////
+//                   ALL STUDENTS COMPLETE THESE SECTIONS
+// Main Class File:    Assignment7.java
+// File:               FSComponent.java
+// Quarter:            Spring 2024
+//
+// Author`s Name:      Sia Khorsand 
+// Professor:          Dr. Ochoa
 
 public abstract class FSComponent {
     private String name;
@@ -40,6 +47,12 @@ public abstract class FSComponent {
 
     @Override
     public boolean equals(Object obj) {
+        if(obj instanceof FSComponent){
+            FSComponent other = (FSComponent) obj;
+            return this.name.equals(other.name);
+        } else {
+            return false;
+        }
     }
 
     /* The following four abstract methods need
