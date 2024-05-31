@@ -23,42 +23,48 @@ import java.nio.file.Paths;
 
 
 public class HumanReadableFile extends FSFile {
-    private String content;
+    private String contents;
 
     // Constructors
-    protected HumanReadableFile() {
-        super("HumanReadableFile");
-    }
+    protected HumanReadableFile() {} 
 
-    protected HumanReadableFile(String name) {
+    protected HumanReadableFile(String name, String contents) {
         super(name);
+        this.contents = contents;
     }
 
     // Methods
-    public String getContent() {
-        return this.content;
+    public String getContents() {
+        return contents;
     }
 
-    public void setContent(String content) {
-        this.content = content;
+    public void setContents(String contents) {
+        this.contents = contents;
     }
 
-    @Override
-    public void setParentDir(FSDirectory dir) {
-        this.setParentDir(dir);
-    }
-
-    @Override
-    public boolean isFile() {
-        return true;
-    }
-
-    public void outputContent(String outputFileName) throws IOException {
+    @Override 
+    public void outputFileContents(String outputFileName) throws Exception {
+        if (contents == null || contents.isEmpty()) {
+            throw new Exception("Empty file contents!");
+        }
         try (PrintWriter writer = new PrintWriter(outputFileName)) {
-            writer.println(this.content);
+            writer.println(this.contents);
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
         }
     }
 
-    public void readContent(String inputFileName) throws IOException {
-        this.content = Files.readString(Paths.get(inputFileName));
-    }
+        @Override
+        public boolean equals(Object obj) {
+            if (obj instanceof HumanReadableFile) {
+                HumanReadableFile other = (HumanReadableFile) obj;
+                return super.equals(other) && ((this.contents == null && other.contents == null) || (this.contents != null && this.contents.equals(other.contents)));
+            } else {
+                return false;
+            }
+        }
+        @Override
+        public String toString() {
+            return "HumanReadableFile: " + this.getName();
+        }
+    } 
